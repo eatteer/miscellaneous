@@ -1,0 +1,101 @@
+:root {
+  --container-min-horizontal-margin: 1rem;
+  --container-max-width: 768px;
+
+  --slider-min-horizontal-margin: 1rem;
+  --slider-max-width: 768px;
+  --slider-gap: 1rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  border-bottom: 1px solid lightslategray;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.main {
+  padding: 1rem 0;
+}
+
+.paragraph {
+  text-align: justify;
+}
+
+.card {
+  width: 230px;
+  aspect-ratio: 16/9;
+  border-radius: 0.5rem;
+  background-color: lightgreen;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+/* @media (min-width: 768px) {
+    :root {
+      --container-max-width: 576px;
+      --slider-max-width: 576px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    :root {
+      --container-max-width: 768px;
+      --slider-max-width: 768px;
+    }
+  } */
+
+/* ---------- COMPONENTS ---------- */
+/* ---------- CONTAINER RELATED ---------- */
+.container {
+  max-width: var(--container-max-width);
+  --min-m: var(--container-min-horizontal-margin);
+  --auto-m: calc((100vw - var(--container-max-width)) / 2);
+  margin: 0 max(var(--min-m), var(--auto-m));
+}
+
+/* ---------- SLIDER RELATED ---------- */
+.slide {
+  display: flex;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Generate fills, uncomment border to see them */
+.slide::before,
+.slide::after {
+  content: "";
+  --min-m: var(--slider-min-horizontal-margin) / 2;
+  --auto-m: calc((100vw - var(--slider-max-width)) / 4);
+  padding: 0 max(var(--min-m), var(--auto-m));
+  border: 1px dashed red;
+}
+
+.slide::-webkit-scrollbar {
+  display: none;
+}
+
+.slide .item {
+  flex-shrink: 0;
+  margin: 0 calc(var(--slider-gap) / 2);
+}
+
+.item:first-child {
+  margin-left: 0;
+}
+
+.item:last-child {
+  margin-right: 0;
+}

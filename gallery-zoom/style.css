@@ -1,0 +1,27 @@
+.gallery {
+  display: flex;
+  width: 500px;
+  height: 330px;
+}
+
+.gallery img {
+  width: 0;
+  flex-grow: 1;
+  object-fit: cover;
+  transition: all 500ms ease-in-out;
+}
+
+.gallery img:hover {
+  width: 250px;
+  cursor: crosshair;
+}
+
+.gallery img:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.gallery img:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
