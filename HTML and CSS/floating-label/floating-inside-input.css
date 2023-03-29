@@ -1,0 +1,41 @@
+.floating-inside-input {
+  position: relative;
+  /* Uncomment border for debugging */
+  /* border: 1px solid red; */
+}
+
+.floating-inside-input input,
+.floating-inside-input span {
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.floating-inside-input input {
+  padding-top: calc((0.75rem * 2) * 0.85);
+  padding-bottom: calc((0.75rem * 2) * 0.15);
+  border: 1px solid var(--base-color);
+  border-radius: 0.2rem;
+  outline-color: var(--primary-color);
+}
+
+.floating-inside-input span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.2s;
+  /* Uncomment border for debugging */
+  /* border: 1px solid blue; */
+}
+
+.floating-inside-input input::placeholder {
+  opacity: 0;
+}
+
+.floating-inside-input input:focus + span,
+.floating-inside-input input:not(:placeholder-shown) + span {
+  left: 0.75rem;
+  /* Align label with input text */
+  padding: 4px 0 0 1.5px;
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}

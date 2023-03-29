@@ -1,0 +1,46 @@
+.floating-border-input {
+  display: inline-block;
+  position: relative;
+  background-color: white;
+  /* Uncomment border for debugging */
+  /* border: 1px solid red; */
+}
+
+.floating-border-input input,
+.floating-border-input span {
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.floating-border-input input {
+  border: 1px solid var(--base-color);
+  border-radius: 0.2rem;
+  outline-color: var(--primary-color);
+}
+
+.floating-border-input input::placeholder {
+  opacity: 0;
+}
+
+.floating-border-input span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Uncomment border for debugging */
+  /* border: 1px solid blue; */
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.floating-border-input input:focus + span,
+.floating-border-input input:not(:placeholder-shown) + span {
+  top: 0px;
+  left: 0.75rem;
+  /* Align label with input text */
+  padding: 0 4px;
+  margin: 0 -2.5px;
+  font-size: 0.8rem;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  background-color: inherit;
+}
