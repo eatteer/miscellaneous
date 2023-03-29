@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="dropdown.css" />
+    <script src="dropdown.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dropdown</title>
+  </head>
+  <body>
+    <section class="flex gap-4">
+      <div class="dropdown">
+        <button class="dropdown-button">One</button>
+        <div class="dropdown-content">
+          <ul>
+            <li class="p-2 cursor-pointer hover:bg-sky-500 hover:text-white">
+              Lorem
+            </li>
+            <li class="p-2 cursor-pointer hover:bg-sky-500 hover:text-white">
+              Ipsum
+            </li>
+            <li class="p-2 cursor-pointer hover:bg-sky-500 hover:text-white">
+              Dolor
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-button">Two</button>
+        <div class="dropdown-content">
+          <ul>
+            <li class="p-2 cursor-pointer hover:bg-sky-500 hover:text-white">
+              Lorem
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

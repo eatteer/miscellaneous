@@ -1,0 +1,33 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dropdown.active .dropdown-content {
+  opacity: 1;
+  transform: translateY(0rem);
+  pointer-events: auto;
+}
+
+/* Styling */
+.dropdown-button {
+  border: 1px solid gray;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-content {
+  top: calc(100% + 0.25rem);
+  left: 0;
+  width: 230px;
+  border: 1px solid gray;
+  border-radius: 0.2rem;
+  background-color: white;
+  transition: 0.3s;
+  transform: translateY(-0.5rem);
+}
