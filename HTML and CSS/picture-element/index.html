@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Picture element</title>
+    <style>
+      .center {
+        width: 230px;
+        margin: 2rem auto;
+      }
+
+      .image {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <picture class="picture">
+        <source
+          class="image"
+          srcset="assets/adult.jpg"
+          media="(min-width: 1024px)"
+        />
+        <source
+          class="image"
+          srcset="assets/child.jpg"
+          media="(min-width: 768px)"
+        />
+        <img class="image" src="assets/baby.webp" />
+      </picture>
+    </div>
+  </body>
+</html>
