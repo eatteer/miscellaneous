@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@viselect/vanilla/dist/viselect.umd.js"></script>
+    <title>Viselect</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      #clearInterestingAreas {
+        margin-bottom: 1rem;
+      }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        height: 70vh;
+        border: 1px solid black;
+      }
+
+      .box span {
+        user-select: none;
+      }
+
+      .selection-area {
+        background: rgba(46, 115, 252, 0.11);
+        border: 2px solid rgba(98, 155, 255, 0.81);
+        border-radius: 0.1em;
+      }
+
+      .interesting-area {
+        border: 2px solid palevioletred;
+        background-color: rgb(255, 182, 193, 0.81);
+      }
+    </style>
+  </head>
+  <body>
+    <button id="clearInterestingAreas">Clear interesting areas</button>
+    <div class="box">
+      <span>Selection area</span>
+    </div>
+    <script>
+      const selection = new SelectionArea({
+        // Class for the selection-area itself (the element).
+        selectionAreaClass: "selection-area",
+
+        // Class for the selection-area container.
+        selectionContainerClass: "selection-area-container",
+
+        // Query selector or dom-node to set up container for the selection-area element.
+        container: "body",
+
+        // document object - if you want to use it within an embed document (or iframe).
+        // If you're inside of a shadow-dom make sure to specify the shadow root here.
+        document: window.document,
+
+        // Query selectors for elements which can be selected.
+        selectables: [],
+
+        // Query selectors for elements from where a selection can be started from.
+        startareas: [".box"],
+
+        // Query selectors for elements which will be used as boundaries for the selection.
+        // The boundary will also be the scrollable container if this is the case.
+        boundaries: [".box"],
+
+        // Behaviour related options.
+        behaviour: {
+          // Specifies what should be done if already selected elements get selected again.
+          //   invert: Invert selection for elements which were already selected
+          //   keep: Keep selected elements (use clearSelection() to remove those)
+          //   drop: Remove stored elements after they have been touched
+          overlap: "invert",
+
+          // On which point an element should be selected.
+          // Available modes are cover (cover the entire element), center (touch the center) or
+          // the default mode is touch (just touching it).
+          intersect: "touch",
+
+          // px, how many pixels the point should move before starting the selection (combined distance).
+          // Or specifiy the threshold for each axis by passing an object like {x: <number>, y: <number>}.
+          startThreshold: 10,
+
+          // Scroll configuration.
+          scrolling: {
+            // On scrollable areas the number on px per frame is devided by this amount.
+            // Default is 10 to provide a enjoyable scroll experience.
+            speedDivider: 10,
+
+            // Browsers handle mouse-wheel events differently, this number will be used as
+            // numerator to calculate the mount of px while scrolling manually: manualScrollSpeed / scrollSpeedDivider.
+            manualSpeed: 750,
+
+            // This property defines the virtual inset margins from the borders of the container
+            // component that, when crossed by the mouse/touch, trigger the scrolling. Useful for
+            // fullscreen containers.
+            startScrollMargins: { x: 0, y: 0 },
+          },
+        },
+
+        // Features.
+        features: {
+          // Enable / disable touch support.
+          touch: true,
+
+          // Range selection.
+          range: true,
+
+          // Configuration in case a selectable gets just clicked.
+          singleTap: {
+            // Enable single-click selection (Also disables range-selection via shift + ctrl).
+            allow: true,
+
+            // 'native' (element was mouse-event target) or 'touch' (element visually touched).
+            intersect: "native",
+          },
+        },
+      });
+
+      selection.on("stop", (event) => {
+        const selectionArea = selection.getSelectionArea();
+        const rect = selectionArea.getBoundingClientRect();
+        const element = document.createElement("div");
+        element.classList.add("interesting-area");
+        element.style.position = "absolute";
+        element.style.width = `${rect.width}px`;
+        element.style.height = `${rect.height}px`;
+        element.style.top = `${rect.top}px`;
+        element.style.left = `${rect.left}px`;
+        document.documentElement.append(element);
+        // console.log(element);
+      });
+
+      const clearInterestingAreas = document.getElementById(
+        "clearInterestingAreas"
+      );
+      clearInterestingAreas.addEventListener("click", (event) => {
+        const interestingAreas = document.querySelectorAll(".interesting-area");
+        interestingAreas.forEach((interestingArea) => {
+          interestingArea.remove();
+        });
+      });
+    </script>
+  </body>
+</html>
